@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
+import Bounty from '../Bounty/Bounty'
+import './bountyList.css'
 
 const BountyList = () => {
   const [form, setForm] = useState('');
   const [list, setList] = useState([]);
 
   const id = list.length;
+  let active = 0;
+  list.forEach((item) => {
+    if (item.completed) active++;
+  });
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -18,24 +24,26 @@ const BountyList = () => {
   }
   function handleCheckBox(id) {
     setList(
-      list.map((l) => {
-        if (id === l.id) {
+      list.map((item) => {
+        if (id === item.id) {
           return {
-            ...l,
-            completed: !l.completed,
+            ...item,
+            completed: !item.completed,
           };
-        }
+        } else return item;
       })
     );
   }
+  function handleDelete(id) {
+    setList(
+      list.filter(item=> item.id !== id)
+    )
+  }
 
-  let active = 0;
-  list.forEach((item) => {
-    if (item.completed) active++;
-  });
+
 
   return (
-    <div>
+    <div className="bountyList-container">
       <header>Bounty List</header>
       <form onSubmit={handleSubmit}>
         <input
@@ -51,14 +59,9 @@ const BountyList = () => {
       </h1>
       <ul>
         {list.map((item) => (
-          <div key={item.id}>
-            <label
-              style={{ textDecoration: item.completed ? 'line-through' : null }}
-            >
-              <input type="checkbox" onChange={() => handleCheckBox(item.id)} />
-              {item.task}
-            </label>
-          </div>
+          <Bounty key={item.id} item={item} handleCheckBox={handleCheckBox} 
+            handleDelete={handleDelete}
+          />
         ))}
       </ul>
     </div>
