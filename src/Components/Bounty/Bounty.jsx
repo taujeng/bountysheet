@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import './bounty.css';
 
-const Bounty = ({ item, handleCheckBox, handleDelete }) => {
+const Bounty = ({ item, handleCheckBox, handleDelete, handleEdit }) => {
   const [hover, setHover] = useState(false);
   const [edit, setEdit] = useState(false);
+
+  function editChange() {}
 
   return (
     <>
@@ -13,13 +15,7 @@ const Bounty = ({ item, handleCheckBox, handleDelete }) => {
         onMouseLeave={() => setHover(false)}
         style={{ border: hover ? 'black 1px solid' : null }}
       >
-        {/* <label
-          style={{ textDecoration: item.completed ? 'line-through' : null }}
-        >
-          <input type="checkbox" onClick={() => handleCheckBox(item.id)} />
-          {item.task}
-        </label> */}
-        {!edit ? (
+        {/* {!edit ? (
           <label
             style={{ textDecoration: item.completed ? 'line-through' : null }}
           >
@@ -28,7 +24,21 @@ const Bounty = ({ item, handleCheckBox, handleDelete }) => {
           </label>
         ) : (
           <h1>edit time</h1>
-        )}
+        )} */}
+        <label
+          style={{ textDecoration: item.completed ? 'line-through' : null }}
+        >
+          <input type="checkbox" onClick={() => handleCheckBox(item.id)} />
+          {edit ? (
+            <input
+              value={item.task}
+              onChange={(e) => handleEdit(item.id, e.target.value)}
+            />
+          ) : (
+            item.task
+          )}
+        </label>
+
         <button onClick={() => setEdit(!edit)}>
           {!edit ? 'Edit' : 'Save'}
         </button>

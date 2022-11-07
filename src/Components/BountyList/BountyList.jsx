@@ -39,6 +39,18 @@ const BountyList = () => {
       list.filter(item=> item.id !== id)
     )
   }
+  function handleEdit(id, task) {
+    setList(
+      list.map(item => {
+        if (item.id === id) {
+          return {
+            ...item,
+            task: task
+          }
+        } else return item
+      })
+    )
+  }
 
 
 
@@ -60,7 +72,7 @@ const BountyList = () => {
       <ul>
         {list.map((item) => (
           <Bounty key={item.id} item={item} handleCheckBox={handleCheckBox} 
-            handleDelete={handleDelete}
+            handleDelete={handleDelete} handleEdit={handleEdit}
           />
         ))}
       </ul>
