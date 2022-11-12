@@ -1,55 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer } from 'react';
 import Bounty from '../Bounty/Bounty'
 import './bountyList.css'
+import listReducer from './listReducer';
 
 const BountyList = () => {
-  const [form, setForm] = useState('');
-  const [list, setList] = useState([]);
+  const [list, dispatch] = useReducer(listReducer, [])
 
-  const id = list.length;
+  const [form, setForm] = useState('');
+  const [listId, setListId] = useState(0)
+
+  // const id = list.length;  -> doesn't work once you add the remove function
+
   let active = 0;
   list.forEach((item) => {
     if (item.completed) active++;
   });
+  console.log(list)
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log('something was sent');
-    setList([...list, { id: id, task: form, completed: false }]);
+    dispatch({
+      type: 'submit',
+      id: listId,
+      task: form
+    })
     setForm('');
-    console.log(list);
+    setListId(listId + 1)
   }
   function handleChange(e) {
     setForm(e.target.value);
   }
   function handleCheckBox(id) {
-    setList(
-      list.map((item) => {
-        if (id === item.id) {
-          return {
-            ...item,
-            completed: !item.completed,
-          };
-        } else return item;
-      })
-    );
+    dispatch({
+      type: 'checkbox',
+      id: id
+    })
   }
   function handleDelete(id) {
-    setList(
-      list.filter(item=> item.id !== id)
-    )
+    dispatch({
+      type: 'delete',
+      id: id
+    })
   }
   function handleEdit(id, task) {
-    setList(
-      list.map(item => {
-        if (item.id === id) {
-          return {
-            ...item,
-            task: task
-          }
-        } else return item
-      })
-    )
+    dispatch({
+      type: 'edit',
+      id: id,
+      task: task
+    })
   }
 
 

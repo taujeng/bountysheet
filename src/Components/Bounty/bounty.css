@@ -1,4 +1,18 @@
 .bounty-container {
   width: 500px;
   background-color: beige;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.bounty {
+  display: flex;
+  align-items: center;
+}
+
+.button-container{
+  display: flex;
+  flex-direction: column;
 }
