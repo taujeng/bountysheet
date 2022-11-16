@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import Clock from 'react-clock'
 import Stopwatch from '../Stopwatch/Stopwatch';
+import Timer from '../Timer/Timer'
 import 'react-clock/dist/Clock.css';
 import "./header.css"
 
@@ -20,6 +21,7 @@ const Header = () => {
     <div className="header-container">
       <Clock value={time} size={200}/>
       <Stopwatch />
+      <Timer />
     </div>
   )
 }
