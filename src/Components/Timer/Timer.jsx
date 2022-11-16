@@ -25,19 +25,39 @@ const Timer = () => {
     };
   }, [timeLeft, timerOn, noTime]);
 
+  const handleSetTimer = (e) => {
+    console.log(e.target.value);
+    // Maximum is 24 hours
+    if (e.target.value > 1440) {
+      setTimeLeft(1440 * 60);
+    } else {
+      setTimeLeft(e.target.value * 60);
+    }
+  };
+
   return (
     <div>
-      {noTime ? (
+      {edit ? (
+        <input
+          type="number"
+          placeholder="minutes.."
+          value={timeLeft / 60}
+          onChange={handleSetTimer}
+          min={0}
+          max={1440}
+          step={5}
+        />
+      ) : noTime ? (
         <div style={{ color: 'red' }}>00:00</div>
       ) : (
         <div>
           {hours}:{minutes}:{seconds}
         </div>
       )}
-      <button onClick={() => setTimerOn(!timerOn)}>
+      <button onClick={() => setTimerOn(!timerOn)} disabled={edit}>
         {timerOn ? 'Stop' : 'Start'}
       </button>
-      <button>Set</button>
+      <button onClick={() => setEdit(!edit)}>{edit ? 'Save' : 'Set'}</button>
     </div>
   );
 };
