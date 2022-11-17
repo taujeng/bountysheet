@@ -1,10 +1,14 @@
+.current-container {
+  width: 750px;
+  background-color: goldenrod;
+}
+
 .bounty-container {
   width: 500px;
   background-color: beige;
   height: 50px;
   display: flex;
   justify-content: space-between;
-
 }
 
 .bounty {

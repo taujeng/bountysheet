@@ -7,15 +7,25 @@ const BountyList = () => {
   const [list, dispatch] = useReducer(listReducer, [])
 
   const [form, setForm] = useState('');
-  const [listId, setListId] = useState(0)
+  const [listId, setListId] = useState(0) // ea item in the list gets an id
+  const [currentBounty, setCurrentBounty] = useState(); // contains id
 
+  console.log(currentBounty)
   // const id = list.length;  -> doesn't work once you add the remove function
 
-  let active = 0;
-  list.forEach((item) => {
-    if (item.completed) active++;
-  });
-  console.log(list)
+  // let active = 0;
+  // list.forEach((item) => {
+  //   if (item.completed) active++;
+  // });
+  // console.log(list)
+
+  // current Bounty info:
+  let current = list.filter(item => item.id === currentBounty)
+  console.log(current)
+  let sideBounty = list.filter(item => item.id !== currentBounty)
+  let todoList = sideBounty.filter(item => !item.completed)
+  let completedList = sideBounty.filter(item=> item.completed)
+  let active = completedList.length;
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -64,13 +74,27 @@ const BountyList = () => {
         />
         <button type="submit">Submit Bounty</button>
       </form>
+      {current[0] ? 
+        <Bounty key={current[0].id} item={current[0]} handleCheckBox={handleCheckBox} 
+            handleDelete={handleDelete} handleEdit={handleEdit} setCurrentBounty={setCurrentBounty}
+            current={true}
+          />
+        : <h1>Click the arrow to feature a bounty.</h1>
+      }
       <h1>
         Bounties Remaining: {active}/{list.length}
       </h1>
       <ul>
-        {list.map((item) => (
+        {todoList.map((item) => (
+          <Bounty key={item.id} item={item} handleCheckBox={handleCheckBox} 
+            handleDelete={handleDelete} handleEdit={handleEdit} setCurrentBounty={setCurrentBounty}
+          />
+        ))}
+        {completedList.map((item) => (
           <Bounty key={item.id} item={item} handleCheckBox={handleCheckBox} 
             handleDelete={handleDelete} handleEdit={handleEdit}
+            setCurrentBounty={setCurrentBounty}
+            completed = {true}
           />
         ))}
       </ul>

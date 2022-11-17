@@ -1,4 +1,5 @@
 export default function timeFormat( time ) {
+
 // time comes in as seconds
   let hours = String(Math.floor(time/3600))
   let minutes = String(Math.floor((time - (parseInt(hours) * 3600)) / 60))

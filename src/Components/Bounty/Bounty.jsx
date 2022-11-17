@@ -1,23 +1,52 @@
 import React, { useState } from 'react';
+import timeFormat from '../timeFormat';
 import './bounty.css';
 
-const Bounty = ({ item, handleCheckBox, handleDelete, handleEdit }) => {
+const Bounty = ({
+  item,
+  handleCheckBox,
+  handleDelete,
+  handleEdit,
+  setCurrentBounty,
+  completed = false,
+  current = false,
+}) => {
   const [hover, setHover] = useState(false);
   const [edit, setEdit] = useState(false);
+
+  console.log(item.time);
+  const { hours, minutes, seconds } = timeFormat(item.time);
 
   return (
     <>
       <div
-        className="bounty-container"
+        className={current ? 'current-container' : 'bounty-container'}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
-        style={{ border: hover ? 'black 1px solid' : null }}
+        style={
+          completed
+            ? {
+                border: hover ? 'red 2px solid' : null,
+                backgroundColor: '#95bb72',
+              }
+            : { border: hover ? 'black 1px solid' : null }
+        }
       >
         <div className="bounty">
+          <button onClick={() => setCurrentBounty(current ? '' : item.id)}>
+            →
+          </button>
+          <div>
+            {hours}:{minutes}:{seconds}
+          </div>
           <label
             style={{ textDecoration: item.completed ? 'line-through' : null }}
           >
-            <input type="checkbox" onClick={() => handleCheckBox(item.id)} />
+            <input
+              type="checkbox"
+              checked={item.completed}
+              onChange={() => handleCheckBox(item.id)}
+            />
             {edit ? (
               <input
                 value={item.task}

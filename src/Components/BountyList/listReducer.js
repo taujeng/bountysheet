@@ -1,7 +1,7 @@
 export default function listReducer(list, action) {
   switch (action.type) {
     case 'submit': {
-      return [...list, { id: action.id, task: action.task, completed: false }]
+      return [...list, { id: action.id, task: action.task, completed: false, time: 0 }]
     }
     case 'checkbox': {
       return list.map((item) => {
