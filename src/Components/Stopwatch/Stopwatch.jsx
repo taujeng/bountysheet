@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import timeFormat from '../timeFormat';
 
-const Stopwatch = () => {
-  const [timePassed, setTimePassed] = useState(0);
+const Stopwatch = ({ timePassed, setTimePassed }) => {
   const [stopWatchOn, setStopWatchOn] = useState(false);
 
   let { hours, minutes, seconds } = timeFormat(timePassed);
@@ -23,7 +22,7 @@ const Stopwatch = () => {
   return (
     <div className="stopwatch-container">
       <h1>
-        Stopwatch: {hours}:{minutes}:{seconds}
+        {hours}:{minutes}:{seconds}
       </h1>
       <button onClick={() => setStopWatchOn(!stopWatchOn)}>
         {stopWatchOn ? 'Stop' : 'Start'}

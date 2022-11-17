@@ -10,11 +10,11 @@ const Bounty = ({
   setCurrentBounty,
   completed = false,
   current = false,
+  handleTime,
 }) => {
   const [hover, setHover] = useState(false);
   const [edit, setEdit] = useState(false);
 
-  console.log(item.time);
   const { hours, minutes, seconds } = timeFormat(item.time);
 
   return (
@@ -36,9 +36,13 @@ const Bounty = ({
           <button onClick={() => setCurrentBounty(current ? '' : item.id)}>
             →
           </button>
+          {current ? (
+            <button onClick={() => handleTime(item.id)}>Save Time</button>
+          ) : null}
           <div>
             {hours}:{minutes}:{seconds}
           </div>
+
           <label
             style={{ textDecoration: item.completed ? 'line-through' : null }}
           >

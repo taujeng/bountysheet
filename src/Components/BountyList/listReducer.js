@@ -23,7 +23,17 @@ export default function listReducer(list, action) {
             ...item,
             task: action.task
           }
-        } else return item
+        } else return item;
+      })
+    }
+    case 'time': {
+      return list.map(item => {
+        if (item.id === action.id) {
+          return {
+            ...item,
+            time: item.time + action.time
+          }
+        } else return item;
       })
     }
     default: {

@@ -3,14 +3,13 @@ import Bounty from '../Bounty/Bounty'
 import './bountyList.css'
 import listReducer from './listReducer';
 
-const BountyList = () => {
+const BountyList = ( {time} ) => {
   const [list, dispatch] = useReducer(listReducer, [])
 
   const [form, setForm] = useState('');
   const [listId, setListId] = useState(0) // ea item in the list gets an id
   const [currentBounty, setCurrentBounty] = useState(); // contains id
 
-  console.log(currentBounty)
   // const id = list.length;  -> doesn't work once you add the remove function
 
   // let active = 0;
@@ -21,7 +20,7 @@ const BountyList = () => {
 
   // current Bounty info:
   let current = list.filter(item => item.id === currentBounty)
-  console.log(current)
+
   let sideBounty = list.filter(item => item.id !== currentBounty)
   let todoList = sideBounty.filter(item => !item.completed)
   let completedList = sideBounty.filter(item=> item.completed)
@@ -60,6 +59,14 @@ const BountyList = () => {
     })
   }
 
+  function handleTime(id) {
+    dispatch({
+      type: 'time',
+      id: id,
+      time: time
+    })
+  }
+
 
 
   return (
@@ -77,27 +84,27 @@ const BountyList = () => {
       {current[0] ? 
         <Bounty key={current[0].id} item={current[0]} handleCheckBox={handleCheckBox} 
             handleDelete={handleDelete} handleEdit={handleEdit} setCurrentBounty={setCurrentBounty}
-            current={true}
+            current={true} handleTime={handleTime}
           />
         : <h1>Click the arrow to feature a bounty.</h1>
       }
       <h1>
         Bounties Remaining: {active}/{list.length}
       </h1>
-      <ul>
-        {todoList.map((item) => (
-          <Bounty key={item.id} item={item} handleCheckBox={handleCheckBox} 
-            handleDelete={handleDelete} handleEdit={handleEdit} setCurrentBounty={setCurrentBounty}
-          />
-        ))}
-        {completedList.map((item) => (
-          <Bounty key={item.id} item={item} handleCheckBox={handleCheckBox} 
-            handleDelete={handleDelete} handleEdit={handleEdit}
-            setCurrentBounty={setCurrentBounty}
-            completed = {true}
-          />
-        ))}
-      </ul>
+      {todoList.map((item) => (
+        <Bounty key={item.id} item={item} handleCheckBox={handleCheckBox} 
+          handleDelete={handleDelete} handleEdit={handleEdit} setCurrentBounty={setCurrentBounty}
+          handleTime={handleTime}
+        />
+      ))}
+      {completedList.map((item) => (
+        <Bounty key={item.id} item={item} handleCheckBox={handleCheckBox} 
+          handleDelete={handleDelete} handleEdit={handleEdit}
+          setCurrentBounty={setCurrentBounty}
+          completed = {true} handleTime={handleTime}
+        />
+      ))}
+
     </div>
   );
 };

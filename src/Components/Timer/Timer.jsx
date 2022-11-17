@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import timeFormat from '../timeFormat';
 
-const Timer = () => {
-  const [timeLeft, setTimeLeft] = useState(600);
+const Timer = ({ timeLeft, setTimeLeft, timeUsed, setTimeUsed }) => {
   const [timerOn, setTimerOn] = useState(false);
   const [edit, setEdit] = useState(false);
 
-  const noTime = timeLeft <= 0 ? true : false;
-
   const { hours, minutes, seconds } = timeFormat(timeLeft);
+
+  const noTime = timeLeft <= 0 ? true : false;
 
   useEffect(() => {
     let interval;
     if (!noTime) {
       if (timerOn) {
-        interval = setInterval(() => setTimeLeft(timeLeft - 1), 1000);
+        interval = setInterval(() => {
+          setTimeLeft(timeLeft - 1);
+          setTimeUsed(timeUsed + 1);
+        }, 1000);
       } else {
         clearInterval(interval);
       }
@@ -23,7 +25,7 @@ const Timer = () => {
     return () => {
       clearInterval(interval);
     };
-  }, [timeLeft, timerOn, noTime]);
+  }, [timeLeft, setTimeLeft, timeUsed, setTimeUsed, timerOn, noTime]);
 
   const handleSetTimer = (e) => {
     console.log(e.target.value);
