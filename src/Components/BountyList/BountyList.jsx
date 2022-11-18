@@ -2,6 +2,7 @@ import React, { useState, useReducer } from 'react';
 import Bounty from '../Bounty/Bounty'
 import './bountyList.css'
 import listReducer from './listReducer';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 
 const BountyList = ( {time} ) => {
   const [list, dispatch] = useReducer(listReducer, [])
@@ -28,6 +29,7 @@ const BountyList = ( {time} ) => {
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (form === "") return;
     dispatch({
       type: 'submit',
       id: listId,
@@ -71,15 +73,14 @@ const BountyList = ( {time} ) => {
 
   return (
     <div className="bountyList-container">
-      <header>Bounty List</header>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="What's your next bounty?"
+          placeholder="Submit a bounty.."
           value={form}
           onChange={handleChange}
         />
-        <button type="submit">Submit Bounty</button>
+        <button type="submit"><AddBoxIcon style={{fontSize: "50px"}}/></button>
       </form>
       {current[0] ? 
         <Bounty key={current[0].id} item={current[0]} handleCheckBox={handleCheckBox} 

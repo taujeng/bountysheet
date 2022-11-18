@@ -27,8 +27,13 @@ const Header = () => {
   return (
     <div className="header-container">
       <header>
-        <Clock value={clock} size={200} />
-        <h1 id="title">Bounty Sheet</h1>
+        <div className="clock-container">
+          <Clock value={clock} size={200} />
+        </div>
+        <div className="title-container">
+          <h1 id="title">Bounty Sheet</h1>
+          {/* <h2>Time is money. Spend it wisely.</h2> */}
+        </div>
         <div className="time-container">
           <>
             {displayTimer ? (
@@ -50,8 +55,6 @@ const Header = () => {
             onClick={() => setDisplayTimer(!displayTimer)}
           />
         </div>
-
-        {/* <button onClick={() => setDisplayTimer(!displayTimer)}>Switch</button> */}
       </header>
       <BountyList time={time} />
     </div>

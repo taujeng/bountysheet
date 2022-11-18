@@ -1,3 +1,4 @@
+
 .current-container {
   width: 100%;
   background-color: goldenrod;
@@ -6,17 +7,32 @@
 .bounty-container {
   width: 80%;
   background-color: beige;
-  height: 50px;
   display: flex;
   justify-content: space-between;
+  font-size: 25px;
+}
+
+#double-arrow {
+  height: 40px;
+  width: 40px;
+  color: green;
+  position: absolute;
+  transform: translate(0px, 0px);
+  cursor: pointer;
+}
+.bounty-container:hover {
+  background-color: rgba(255, 0, 0, 0.6);;
 }
 
 .bounty {
   display: flex;
   align-items: center;
+  padding-left: 50px;
 }
 
-
+.bounty .bounty-time {
+  padding-right: 20px;
+}
 
 .button-container{
   display: flex;

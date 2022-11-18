@@ -2,6 +2,9 @@
   height: 200px;
   width: 100%;
   margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .header-container header {
@@ -10,11 +13,28 @@
   align-items: center;
 }
 
-#title {
-  font-size: 45px;
+.clock-container {
+  position: absolute;
+  top: 50;
+  right: 75%;
+}
+
+.time-container {
+  position: absolute;
+  top: 50;
+  left: 75%;
+}
+
+
+.title-container #title {
+  font-size: 60px;
+}
+
+.title-container h2 {
+  font-style: italic;
+  font-size: 20px;
 }
 
 .time-container {
   display: flex;
 }
-
