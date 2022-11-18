@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import timeFormat from '../timeFormat';
+import './timer.css';
 
 const Timer = ({ timeLeft, setTimeLeft, timeUsed, setTimeUsed }) => {
   const [timerOn, setTimerOn] = useState(false);
@@ -38,7 +39,7 @@ const Timer = ({ timeLeft, setTimeLeft, timeUsed, setTimeUsed }) => {
   };
 
   return (
-    <div>
+    <div className="timer-container">
       {edit ? (
         <input
           type="number"
@@ -56,10 +57,12 @@ const Timer = ({ timeLeft, setTimeLeft, timeUsed, setTimeUsed }) => {
           {hours}:{minutes}:{seconds}
         </div>
       )}
-      <button onClick={() => setTimerOn(!timerOn)} disabled={edit}>
-        {timerOn ? 'Stop' : 'Start'}
-      </button>
-      <button onClick={() => setEdit(!edit)}>{edit ? 'Save' : 'Set'}</button>
+      <div className="button-container">
+        <button onClick={() => setTimerOn(!timerOn)} disabled={edit}>
+          {timerOn ? 'Stop' : 'Start'}
+        </button>
+        <button onClick={() => setEdit(!edit)}>{edit ? 'Save' : 'Set'}</button>
+      </div>
     </div>
   );
 };

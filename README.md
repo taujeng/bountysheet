@@ -13,3 +13,8 @@
 - [ ] Save bounties to local storage
 - [x] Fix Checkmarks. Rn errors out since I added `active`
 - [x] Edit button/function
+
+#### Resources Used
+
+- React Clock
+- Material UI

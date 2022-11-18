@@ -5,6 +5,7 @@ import Timer from '../Timer/Timer';
 import 'react-clock/dist/Clock.css';
 import './header.css';
 import BountyList from '../BountyList/BountyList';
+import AutorenewIcon from '@mui/icons-material/Autorenew';
 
 const Header = () => {
   const [clock, setClock] = useState(new Date());
@@ -27,23 +28,31 @@ const Header = () => {
     <div className="header-container">
       <header>
         <Clock value={clock} size={200} />
-        {displayTimer ? (
-          <Timer
-            timeLeft={timeLeft}
-            setTimeLeft={setTimeLeft}
-            timeUsed={timeUsed}
-            setTimeUsed={setTimeUsed}
+        <h1 id="title">Bounty Sheet</h1>
+        <div className="time-container">
+          <>
+            {displayTimer ? (
+              <Timer
+                timeLeft={timeLeft}
+                setTimeLeft={setTimeLeft}
+                timeUsed={timeUsed}
+                setTimeUsed={setTimeUsed}
+              />
+            ) : (
+              <Stopwatch
+                timePassed={timePassed}
+                setTimePassed={setTimePassed}
+              />
+            )}
+          </>
+          <AutorenewIcon
+            style={{ fontSize: '40px' }}
+            onClick={() => setDisplayTimer(!displayTimer)}
           />
-        ) : (
-          <Stopwatch timePassed={timePassed} setTimePassed={setTimePassed} />
-        )}
-        <button onClick={() => setDisplayTimer(!displayTimer)}>Switch</button>
+        </div>
+
+        {/* <button onClick={() => setDisplayTimer(!displayTimer)}>Switch</button> */}
       </header>
-      <h1>{timePassed}</h1>
-      <h1>
-        {timeLeft} --
-        {timeUsed}
-      </h1>
       <BountyList time={time} />
     </div>
   );
