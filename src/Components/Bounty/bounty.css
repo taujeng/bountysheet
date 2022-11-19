@@ -1,7 +1,36 @@
+.bounty-outer{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+
+}
+
 
 .current-container {
-  width: 100%;
+  width: 80%;
   background-color: goldenrod;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 40px;
+  margin-top: 50px;
+  padding: 20px;
+  border: 2px darkblue solid;
+  border-radius: 15px;
+}
+
+.current-container.example {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.current-container .bounty label input {
+  height: 45px;
+  width: 45px;
 }
 
 .current-container .bounty-button {
@@ -11,13 +40,12 @@
 }
 
 .bounty-container {
-  width: 60%;
   display: flex;
   justify-content: space-between;
-  font-size: 30px;
   border: 1px darkslategrey solid;
   border-radius: 15px;
-  padding: 20px 0;
+  padding: 20px 20px;
+  width: 60%;
 }
 
 #double-arrow {
@@ -35,8 +63,10 @@
 .bounty {
   display: flex;
   align-items: center;
-  padding-left: 50px;
+  /* padding-left: 50px; */
+  width: 70%;
 }
+
 
 .bounty .bounty-time {
   padding-right: 20px;
@@ -44,20 +74,59 @@
 
 .bounty label {
   display: flex;
+  width: 100%;
+  font-size: 30px;
 }
 
-.bounty label input {
+/* .bounty label input {
   margin-right: 15px;
-}
+  height: 30px;
+  width: 30px;
+} */
+
+/* .bounty label .bounty-task {
+  font-size: 30px;
+  width: 100%;
+} */
 
 .button-container{
   display: flex;
+  flex-direction: row;
   align-items: center;
 }
 
-.button-container .bounty-button {
+.bounty .bounty-button {
   cursor: pointer;
   padding-right: 10px;
   font-size: 40px;
 }
 
+.bounty-container .bounty-task {
+  /* text-overflow: hidden;
+  overflow: hidden; */
+  /* word-wrap: break-word; */
+  inline-size: 95%;
+  /* overflow: hidden; */
+  overflow-wrap: break-word;
+  text-overflow: ellipsis;
+}
+
+.bounty-container #bounty-checkbox {
+  height: 30px;
+  width: 30px;
+}
+
+
+.bounty-container .bounty-edit {
+  width: 100%;
+  font-size: 30px;
+  margin-left: 10px;
+  /* word-wrap: break-word; */
+
+}
+
+.bounty-container .bounty-button {
+  cursor: pointer;
+  padding-right: 10px;
+  font-size: 40px; 
+}

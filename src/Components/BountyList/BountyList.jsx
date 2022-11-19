@@ -1,6 +1,7 @@
 import React, { useState, useReducer } from 'react';
 import Bounty from '../Bounty/Bounty';
 import './bountyList.css';
+import '../Bounty/bounty.css';
 import Meter from '../Meter/Meter';
 import listReducer from './listReducer';
 import AddBoxIcon from '@mui/icons-material/AddBox';
@@ -10,7 +11,7 @@ const BountyList = ({ time }) => {
 
   const [form, setForm] = useState('');
   const [listId, setListId] = useState(1); // ea item in the list gets an id
-  const [currentBounty, setCurrentBounty] = useState(); // contains id
+  const [currentBounty, setCurrentBounty] = useState(0); // contains id
 
   // const id = list.length;  -> doesn't work once you add the remove function
 
@@ -20,7 +21,7 @@ const BountyList = ({ time }) => {
   // });
   // console.log(list)
 
-  // current bounty info:
+  // current bounty info: *@array
   let current = list.filter((item) => item.id === currentBounty);
   // remaining bounties:
   let sideBounty = list.filter((item) => item.id !== currentBounty);
@@ -98,16 +99,9 @@ const BountyList = ({ time }) => {
           handleTime={handleTime}
         />
       ) : (
-        <Bounty
-          key={10}
-          item={{ id: 0, task: 'Example: Walk the dog.', time: 0 }}
-          handleCheckBox={handleCheckBox}
-          handleDelete={handleDelete}
-          handleEdit={handleEdit}
-          setCurrentBounty={setCurrentBounty}
-          current={true}
-          handleTime={handleTime}
-        />
+        <div className="current-container example">
+          <em>Example: Walk the dog.</em>
+        </div>
       )}
       <div className="meter-container">
         <h1>
