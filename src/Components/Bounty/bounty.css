@@ -4,7 +4,8 @@
   justify-content: center;
   align-items: center;
   font-size: 30px;
-
+  padding-right: 50px;
+  position: relative;
 }
 
 .bounty-outer .bounty-button {
@@ -12,6 +13,18 @@
   padding-right: 10px;
   font-size: 40px;  
 }
+.bounty-outer .star {
+  position: absolute;
+  left: 275px;
+  /* transform: translate(-200px); */
+}
+
+.bounty-outer .current-star {
+  position: absolute;
+  left: 100px;
+  /* transform: translateX(50px); */
+}
+
 
 
 .current-container {
@@ -21,10 +34,10 @@
   align-items: center;
   justify-content: space-between;
   font-size: 40px;
-  margin-top: 50px;
   padding: 20px;
   border: 2px darkblue solid;
   border-radius: 15px;
+  position: relative;
 }
 
 .current-container.example {

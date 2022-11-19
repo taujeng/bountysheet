@@ -26,8 +26,6 @@ const Bounty = ({
 
   const { hours, minutes, seconds } = timeFormat(item.time);
 
-  if (completed && current) setCurrentBounty(0);
-
   return (
     <div
       className="bounty-outer"
@@ -36,12 +34,13 @@ const Bounty = ({
     >
       {current ? (
         <Star
-          className="bounty-button"
+          className="bounty-button current-star"
+          // style={hover ? { display: 'inline' } : { display: 'none' }}
           onClick={() => setCurrentBounty(current ? '' : item.id)}
         />
       ) : (
         <StarBorder
-          className="bounty-button"
+          className="bounty-button star"
           style={hover ? { display: 'inline' } : { display: 'none' }}
           onClick={() => setCurrentBounty(current ? '' : item.id)}
         />
