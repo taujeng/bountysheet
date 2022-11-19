@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import timeFormat from '../timeFormat';
 import './bounty.css';
-import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
+import { DoubleArrow, Edit, Delete, Alarm } from '@mui/icons-material/';
 
 const Bounty = ({
   item,
@@ -26,26 +26,25 @@ const Bounty = ({
       style={completed ? { backgroundColor: '#95bb72' } : null}
     >
       {hover ? (
-        <DoubleArrowIcon
+        <DoubleArrow
           id="double-arrow"
           onClick={() => setCurrentBounty(current ? '' : item.id)}
         />
       ) : null}
       <div className="bounty">
-        {/* <button onClick={() => setCurrentBounty(current ? '' : item.id)}>
-            →
-          </button> */}
         {current ? (
-          <button onClick={() => handleTime(item.id)}>Save Time</button>
+          <Alarm className="bounty-button" onClick={() => handleTime(item.id)}>
+            Save Time
+          </Alarm>
         ) : null}
         <div className="bounty-time">
           {hours}:{minutes}:{seconds}
         </div>
-
         <label
           style={{ textDecoration: item.completed ? 'line-through' : null }}
         >
           <input
+            style={{ height: '30px', width: '30px' }}
             type="checkbox"
             checked={item.completed}
             onChange={() => handleCheckBox(item.id)}
@@ -61,10 +60,12 @@ const Bounty = ({
         </label>
       </div>
       <div className="button-container">
-        <button onClick={() => setEdit(!edit)}>
+        <Edit className="bounty-button" onClick={() => setEdit(!edit)}>
           {!edit ? 'Edit' : 'Save'}
-        </button>
-        <button onClick={() => handleDelete(item.id)}>Remove</button>
+        </Edit>
+        <Delete className="bounty-button" onClick={() => handleDelete(item.id)}>
+          Remove
+        </Delete>
       </div>
     </div>
   );

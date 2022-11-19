@@ -29,3 +29,15 @@
 .bountyList-container form button:hover {
   color: green;
 }
+
+    /* Meter */
+.meter-container {
+  display: flex;
+  align-items: center;
+}
+
+.meter-container h1{
+  display: flex;
+  align-items: center;
+  margin: 0 20px;
+}
