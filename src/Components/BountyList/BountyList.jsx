@@ -9,24 +9,27 @@ const BountyList = ({ time }) => {
   const [list, dispatch] = useReducer(listReducer, []);
 
   const [form, setForm] = useState('');
-  const [listId, setListId] = useState(0); // ea item in the list gets an id
+  const [listId, setListId] = useState(1); // ea item in the list gets an id
   const [currentBounty, setCurrentBounty] = useState(); // contains id
 
   // const id = list.length;  -> doesn't work once you add the remove function
 
-  // let active = 0;
+  // let finish = 0;
   // list.forEach((item) => {
-  //   if (item.completed) active++;
+  //   if (item.completed) finish++;
   // });
   // console.log(list)
 
-  // current Bounty info:
+  // current bounty info:
   let current = list.filter((item) => item.id === currentBounty);
-
+  // remaining bounties:
   let sideBounty = list.filter((item) => item.id !== currentBounty);
+  // incomplete bounties:
   let todoList = sideBounty.filter((item) => !item.completed);
+  // completed bounties:
   let completedList = sideBounty.filter((item) => item.completed);
-  let active = completedList.length;
+  // # of completed bounties
+  let finish = list.filter((item) => item.completed).length;
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -95,15 +98,24 @@ const BountyList = ({ time }) => {
           handleTime={handleTime}
         />
       ) : (
-        <h1>Click the arrow to feature a bounty.</h1>
+        <Bounty
+          key={10}
+          item={{ id: 0, task: 'Example: Walk the dog.', time: 0 }}
+          handleCheckBox={handleCheckBox}
+          handleDelete={handleDelete}
+          handleEdit={handleEdit}
+          setCurrentBounty={setCurrentBounty}
+          current={true}
+          handleTime={handleTime}
+        />
       )}
       <div className="meter-container">
         <h1>
-          {active}/{list.length}
+          {finish}/{list.length}
         </h1>
-        <Meter percent={active / list.length} animate={true} />
+        <Meter percent={finish / list.length} animate={true} />
         <h1>
-          {Math.round((active / (list.length ? list.length : 1)) * 100).toFixed(
+          {Math.round((finish / (list.length ? list.length : 1)) * 100).toFixed(
             0
           ) + '%'}
         </h1>

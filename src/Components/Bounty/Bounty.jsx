@@ -18,6 +18,8 @@ const Bounty = ({
 
   const { hours, minutes, seconds } = timeFormat(item.time);
 
+  if (completed && current) setCurrentBounty(0);
+
   return (
     <div
       className={current ? 'current-container' : 'bounty-container'}
@@ -25,12 +27,12 @@ const Bounty = ({
       onMouseLeave={() => setHover(false)}
       style={completed ? { backgroundColor: '#95bb72' } : null}
     >
-      {hover ? (
+      {hover && (
         <DoubleArrow
           id="double-arrow"
           onClick={() => setCurrentBounty(current ? '' : item.id)}
         />
-      ) : null}
+      )}
       <div className="bounty">
         {current ? (
           <Alarm className="bounty-button" onClick={() => handleTime(item.id)}>
