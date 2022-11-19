@@ -7,6 +7,12 @@
 
 }
 
+.bounty-outer .bounty-button {
+  cursor: pointer;
+  padding-right: 10px;
+  font-size: 40px;  
+}
+
 
 .current-container {
   width: 80%;

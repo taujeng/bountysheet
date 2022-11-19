@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import timeFormat from '../timeFormat';
 import './bounty.css';
 import {
-  DoubleArrow,
   Edit,
   Delete,
   Alarm,
   CheckBox,
   CheckBoxOutlineBlank,
   StarBorder,
+  Star,
 } from '@mui/icons-material/';
 
 const Bounty = ({
@@ -29,20 +29,27 @@ const Bounty = ({
   if (completed && current) setCurrentBounty(0);
 
   return (
-    <div className="bounty-outer">
-      <DoubleArrow onClick={() => setCurrentBounty(current ? '' : item.id)} />
+    <div
+      className="bounty-outer"
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+    >
+      {current ? (
+        <Star
+          className="bounty-button"
+          onClick={() => setCurrentBounty(current ? '' : item.id)}
+        />
+      ) : (
+        <StarBorder
+          className="bounty-button"
+          style={hover ? { display: 'inline' } : { display: 'none' }}
+          onClick={() => setCurrentBounty(current ? '' : item.id)}
+        />
+      )}
       <div
         className={current ? 'current-container' : 'bounty-container'}
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
         style={completed ? { backgroundColor: '#95bb72' } : null}
       >
-        {hover && (
-          <DoubleArrow
-            id="double-arrow"
-            onClick={() => setCurrentBounty(current ? '' : item.id)}
-          />
-        )}
         <div className="bounty">
           {current ? (
             <Alarm
