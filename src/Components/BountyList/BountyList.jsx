@@ -1,10 +1,12 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer, useEffect } from 'react';
 import Bounty from '../Bounty/Bounty';
 import './bountyList.css';
 import '../Bounty/bounty.css';
 import Meter from '../Meter/Meter';
 import listReducer from './listReducer';
 import AddBoxIcon from '@mui/icons-material/AddBox';
+
+let grabLocal = false;
 
 const BountyList = ({ time }) => {
   const [list, dispatch] = useReducer(listReducer, []);
@@ -15,11 +17,25 @@ const BountyList = ({ time }) => {
 
   // const id = list.length;  -> doesn't work once you add the remove function
 
-  // let finish = 0;
-  // list.forEach((item) => {
-  //   if (item.completed) finish++;
-  // });
-  // console.log(list)
+  useEffect(() => {
+    // Only run once when app loads
+    if (!grabLocal) {
+      grabLocal = true;
+      const getLocalBounties = localStorage.getItem('bounties');
+      const startingData = getLocalBounties
+        ? JSON.parse(getLocalBounties.split(','))
+        : [];
+
+      // store localStorage bounties to list
+      dispatch({
+        type: 'new',
+        list: startingData,
+      });
+      console.log(startingData);
+      // dispatch to list. for loop thru the startingData and dispatch them one by one?
+      // who gets to be current bounty? do I have to add that info to list?
+    }
+  });
 
   // current bounty info: *@array
   let current = list.filter((item) => item.id === currentBounty);
@@ -42,6 +58,8 @@ const BountyList = ({ time }) => {
     });
     setForm('');
     setListId(listId + 1);
+    // Update Local Storage
+    localStorage.setItem('bounties', JSON.stringify(list));
   }
   function handleChange(e) {
     setForm(e.target.value);

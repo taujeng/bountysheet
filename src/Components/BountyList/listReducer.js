@@ -1,10 +1,17 @@
 export default function listReducer(list, action) {
   switch (action.type) {
+    case 'new': {
+      return action.list
+    }
     case 'submit': {
-      return [...list, { id: action.id, task: action.task, completed: false, time: 0 }]
+      let newList = [...list, { id: action.id, task: action.task, completed: false, time: 0 }]
+
+      // Update Local Storage
+      localStorage.setItem('bounties', JSON.stringify(newList));
+      return newList;
     }
     case 'checkbox': {
-      return list.map((item) => {
+      let newList = list.map((item) => {
         if (action.id === item.id) {
           return {
             ...item,
@@ -12,12 +19,18 @@ export default function listReducer(list, action) {
           };
         } else return item;
       })
+      // Update Local Storage
+      localStorage.setItem('bounties', JSON.stringify(newList));
+      return newList;
     }
     case 'delete': {
-      return list.filter(item=> item.id !== action.id)
+      let newList = list.filter(item=> item.id !== action.id)
+      // Update Local Storage
+      localStorage.setItem('bounties', JSON.stringify(newList));
+      return newList;
     }
     case 'edit': {
-      return list.map(item => {
+      let newList = list.map(item => {
         if (item.id === action.id) {
           return {
             ...item,
@@ -25,9 +38,12 @@ export default function listReducer(list, action) {
           }
         } else return item;
       })
+      // Update Local Storage
+      localStorage.setItem('bounties', JSON.stringify(newList));
+      return newList;
     }
     case 'time': {
-      return list.map(item => {
+      let newList = list.map(item => {
         if (item.id === action.id) {
           return {
             ...item,
@@ -35,6 +51,9 @@ export default function listReducer(list, action) {
           }
         } else return item;
       })
+      // Update Local Storage
+      localStorage.setItem('bounties', JSON.stringify(newList));
+      return newList;
     }
     default: {
       throw Error('Unknown action ' + action.type)
