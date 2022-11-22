@@ -16,7 +16,7 @@ const Bounty = ({
   handleCheckBox,
   handleDelete,
   handleEdit,
-  setCurrentBounty,
+  handleStar,
   completed = false,
   current = false,
   handleTime,
@@ -36,13 +36,13 @@ const Bounty = ({
         <Star
           className="bounty-button current-star"
           // style={hover ? { display: 'inline' } : { display: 'none' }}
-          onClick={() => setCurrentBounty(current ? '' : item.id)}
+          onClick={() => handleStar(item.id)}
         />
       ) : (
         <StarBorder
           className="bounty-button star"
           style={hover ? { display: 'inline' } : { display: 'none' }}
-          onClick={() => setCurrentBounty(current ? '' : item.id)}
+          onClick={() => handleStar(item.id)}
         />
       )}
       <div

@@ -4,7 +4,7 @@ export default function listReducer(list, action) {
       return action.list
     }
     case 'submit': {
-      let newList = [...list, { id: action.id, task: action.task, completed: false, time: 0 }]
+      let newList = [...list, { id: action.id, task: action.task, completed: false, time: 0, star: false }]
 
       // Update Local Storage
       localStorage.setItem('bounties', JSON.stringify(newList));
@@ -50,6 +50,26 @@ export default function listReducer(list, action) {
             time: item.time + action.time
           }
         } else return item;
+      })
+      // Update Local Storage
+      localStorage.setItem('bounties', JSON.stringify(newList));
+      return newList;
+    }
+    case 'star': {
+      let newList = list.map(item => {
+        if (item.id === action.id) {
+          return {
+            ...item,
+            star: !item.star
+          }
+        } else if (item.star) {
+          return {
+            ...item,
+            star: false
+          }
+        } else {
+          return item
+        }
       })
       // Update Local Storage
       localStorage.setItem('bounties', JSON.stringify(newList));

@@ -38,20 +38,34 @@ const BountyList = ({ time }) => {
         max = Math.max(i.id, max);
       }
       setListId(max + 1);
-      console.log(startingData);
     }
   });
 
-  // current bounty info: *@array
-  let current = list.filter((item) => item.id === currentBounty);
-  // remaining bounties:
-  let sideBounty = list.filter((item) => item.id !== currentBounty);
-  // incomplete bounties:
-  let todoList = sideBounty.filter((item) => !item.completed);
-  // completed bounties:
-  let completedList = sideBounty.filter((item) => item.completed);
-  // # of completed bounties
-  let finish = list.filter((item) => item.completed).length;
+  let current = {},
+    completedList = [],
+    todoList = [];
+  let finish = 0;
+  for (let bounty of list) {
+    if (bounty.star) {
+      current = bounty;
+    } else if (bounty.completed) {
+      completedList.push(bounty);
+    } else {
+      todoList.push(bounty);
+    }
+    if (bounty.completed) finish++;
+  }
+
+  // // current bounty info: *@array
+  // let current = list.filter((item) => item.id === currentBounty);
+  // // remaining bounties:
+  // let sideBounty = list.filter((item) => item.id !== currentBounty);
+  // // incomplete bounties:
+  // let todoList = sideBounty.filter((item) => !item.completed);
+  // // completed bounties:
+  // let completedList = sideBounty.filter((item) => item.completed);
+  // // # of completed bounties
+  // let finish = list.filter((item) => item.completed).length;
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -97,6 +111,13 @@ const BountyList = ({ time }) => {
     });
   }
 
+  function handleStar(id) {
+    dispatch({
+      type: 'star',
+      id: id,
+    });
+  }
+
   return (
     <div className="bountyList-container">
       <form onSubmit={handleSubmit}>
@@ -110,14 +131,14 @@ const BountyList = ({ time }) => {
           <AddBoxIcon style={{ fontSize: '50px' }} />
         </button>
       </form>
-      {current[0] ? (
+      {current.id ? (
         <Bounty
-          key={current[0].id}
-          item={current[0]}
+          key={current.id}
+          item={current}
           handleCheckBox={handleCheckBox}
           handleDelete={handleDelete}
           handleEdit={handleEdit}
-          setCurrentBounty={setCurrentBounty}
+          handleStar={handleStar}
           current={true}
           handleTime={handleTime}
         />
@@ -144,7 +165,7 @@ const BountyList = ({ time }) => {
           handleCheckBox={handleCheckBox}
           handleDelete={handleDelete}
           handleEdit={handleEdit}
-          setCurrentBounty={setCurrentBounty}
+          handleStar={handleStar}
           handleTime={handleTime}
         />
       ))}
@@ -155,7 +176,7 @@ const BountyList = ({ time }) => {
           handleCheckBox={handleCheckBox}
           handleDelete={handleDelete}
           handleEdit={handleEdit}
-          setCurrentBounty={setCurrentBounty}
+          handleStar={handleStar}
           completed={true}
           handleTime={handleTime}
         />
