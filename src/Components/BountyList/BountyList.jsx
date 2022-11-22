@@ -31,9 +31,14 @@ const BountyList = ({ time }) => {
         type: 'new',
         list: startingData,
       });
+
+      // Determine where listId should start so there's no duplicates
+      let max = 0;
+      for (let i of startingData) {
+        max = Math.max(i.id, max);
+      }
+      setListId(max + 1);
       console.log(startingData);
-      // dispatch to list. for loop thru the startingData and dispatch them one by one?
-      // who gets to be current bounty? do I have to add that info to list?
     }
   });
 
