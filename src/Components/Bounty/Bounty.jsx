@@ -9,6 +9,7 @@ import {
   CheckBoxOutlineBlank,
   StarBorder,
   Star,
+  LocalAtm,
 } from '@mui/icons-material/';
 
 const Bounty = ({
@@ -17,7 +18,6 @@ const Bounty = ({
   handleDelete,
   handleEdit,
   handleStar,
-  completed = false,
   current = false,
   handleTime,
 }) => {
@@ -25,6 +25,32 @@ const Bounty = ({
   const [hover, setHover] = useState(false);
 
   const { hours, minutes, seconds } = timeFormat(item.time);
+
+  function handleCash() {
+    handleDelete(item.id);
+
+    const finishDate = Date().slice(4, 15);
+
+    const pastHistory = localStorage.getItem('BountyHistory');
+    const newHistory = pastHistory
+      ? new Map(JSON.parse(pastHistory))
+      : new Map();
+    if (newHistory.has(finishDate)) {
+      let oldValue = newHistory.get(finishDate);
+      newHistory.set(finishDate, {
+        ...oldValue,
+        //    grabs old value, adds new value
+        time: oldValue.time + item.time,
+        bounties: oldValue.bounties + 1,
+      });
+    } else {
+      newHistory.set(finishDate, {
+        time: item.time,
+        bounties: 1,
+      });
+    }
+    localStorage.setItem('BountyHistory', JSON.stringify([...newHistory]));
+  }
 
   return (
     <div
@@ -47,7 +73,7 @@ const Bounty = ({
       )}
       <div
         className={current ? 'current-container' : 'bounty-container'}
-        style={completed ? { backgroundColor: '#95bb72' } : null}
+        style={item.completed ? { backgroundColor: '#95bb72' } : null}
       >
         <div className="bounty">
           {current ? (
@@ -95,12 +121,14 @@ const Bounty = ({
           <Edit className="bounty-button" onClick={() => setEdit(!edit)}>
             {!edit ? 'Edit' : 'Save'}
           </Edit>
-          <Delete
-            className="bounty-button"
-            onClick={() => handleDelete(item.id)}
-          >
-            Remove
-          </Delete>
+          {item.completed ? (
+            <LocalAtm className="bounty-button" onClick={handleCash} />
+          ) : (
+            <Delete
+              className="bounty-button"
+              onClick={() => handleDelete(item.id)}
+            />
+          )}
         </div>
       </div>
     </div>
