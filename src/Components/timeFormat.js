@@ -13,7 +13,7 @@ export default function timeFormat( time ) {
     hours = "0" + hours
   }
   if (minutes.length === 1) minutes = "0" + minutes
-  if (seconds.length === 1 ) seconds = "0" + seconds
+  if (seconds.length === 1) seconds = "0" + seconds
 
 
 
