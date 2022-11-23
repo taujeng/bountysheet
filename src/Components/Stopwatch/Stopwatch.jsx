@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import timeFormat from '../timeFormat';
 import './stopwatch.css';
 
-const Stopwatch = ({ timePassed, setTimePassed }) => {
+const Stopwatch = ({ timePassed, stopwatchChange }) => {
   const [stopWatchOn, setStopWatchOn] = useState(false);
 
   let { hours, minutes, seconds } = timeFormat(timePassed);
@@ -10,7 +10,7 @@ const Stopwatch = ({ timePassed, setTimePassed }) => {
   useEffect(() => {
     let interval;
     if (stopWatchOn) {
-      interval = setInterval(() => setTimePassed(timePassed + 1), 1000);
+      interval = setInterval(() => stopwatchChange(timePassed + 1), 1000);
     } else {
       clearInterval(interval);
     }
@@ -31,7 +31,7 @@ const Stopwatch = ({ timePassed, setTimePassed }) => {
         </button>
         <button
           onClick={() => {
-            setTimePassed(0);
+            stopwatchChange(0, true);
             setStopWatchOn(false);
           }}
         >

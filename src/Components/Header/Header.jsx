@@ -16,13 +16,44 @@ const Header = () => {
 
   let time = displayTimer ? timeUsed : timePassed;
 
+  const localData = localStorage.getItem('BountyTime');
+  const localTime = localData ? new Map(JSON.parse(localData)) : false;
+
   useEffect(() => {
     const interval = setInterval(() => setClock(new Date(), 1000));
+
+    // Check if local storage has a Bounty Time saved
+    if (localTime) {
+      setTimePassed(localTime.get('stopwatch'));
+      setTimeLeft(localTime.get('timer').timeLeft);
+      setTimeUsed(localTime.get('timer').timeUsed);
+    } else {
+      // if first time, set initial Local Storage "BountyTime"
+      let newTime = new Map([
+        ['stopwatch', 0],
+        [
+          'timer',
+          [
+            ['timeLeft', 600],
+            ['timeUsed', 0],
+          ],
+        ],
+      ]);
+      localStorage.setItem('BountyTime', JSON.stringify([...newTime]));
+    }
 
     return () => {
       clearInterval(interval);
     };
   }, []);
+
+  // Handle StopWatch Changes
+  function stopwatchChange(time, reset = false) {
+    setTimePassed(time);
+    // Update Local Storage Time:
+    localTime.set('stopwatch', reset ? 0 : localTime.get('stopwatch') + 1);
+    localStorage.setItem('BountyTime', JSON.stringify([...localTime]));
+  }
 
   return (
     <div className="header-container">
@@ -31,7 +62,9 @@ const Header = () => {
           <Clock value={clock} size={200} />
         </div>
         <div className="title-container">
-          <h1 id="title">Bounty Sheet</h1>
+          <h1 id="title">
+            Bounty <br></br>Sheet
+          </h1>
           {/* <h2>Time is money. Spend it wisely.</h2> */}
         </div>
         <div className="time-container">
@@ -46,7 +79,7 @@ const Header = () => {
             ) : (
               <Stopwatch
                 timePassed={timePassed}
-                setTimePassed={setTimePassed}
+                stopwatchChange={stopwatchChange}
               />
             )}
           </>
