@@ -6,6 +6,7 @@ import 'react-clock/dist/Clock.css';
 import './header.css';
 import BountyList from '../BountyList/BountyList';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
+import { handleBreakpoints } from '@mui/system';
 
 const Header = () => {
   const [clock, setClock] = useState(new Date());
@@ -25,8 +26,9 @@ const Header = () => {
     // Check if local storage has a Bounty Time saved
     if (localTime) {
       setTimePassed(localTime.get('stopwatch'));
-      setTimeLeft(localTime.get('timer').timeLeft);
-      setTimeUsed(localTime.get('timer').timeUsed);
+      // setTimeLeft(localTime.get('timer').timeLeft);
+      // setTimeUsed(localTime.get('timer').timeUsed);
+      setDisplayTimer(localTime.get('displayTimer'));
     } else {
       // if first time, set initial Local Storage "BountyTime"
       let newTime = new Map([
@@ -37,6 +39,7 @@ const Header = () => {
             ['timeLeft', 600],
             ['timeUsed', 0],
           ],
+          ['displayTimer', false],
         ],
       ]);
       localStorage.setItem('BountyTime', JSON.stringify([...newTime]));
@@ -52,6 +55,13 @@ const Header = () => {
     setTimePassed(time);
     // Update Local Storage Time:
     localTime.set('stopwatch', reset ? 0 : localTime.get('stopwatch') + 1);
+    localStorage.setItem('BountyTime', JSON.stringify([...localTime]));
+  }
+
+  // Handle Switching between Stopwatch and Timer
+  function handleSwitch() {
+    setDisplayTimer(!displayTimer);
+    localTime.set('displayTimer', !displayTimer);
     localStorage.setItem('BountyTime', JSON.stringify([...localTime]));
   }
 
@@ -83,10 +93,7 @@ const Header = () => {
               />
             )}
           </>
-          <AutorenewIcon
-            style={{ fontSize: '40px' }}
-            onClick={() => setDisplayTimer(!displayTimer)}
-          />
+          <AutorenewIcon style={{ fontSize: '40px' }} onClick={handleSwitch} />
         </div>
       </header>
       <BountyList time={time} />
