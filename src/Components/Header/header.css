@@ -25,9 +25,12 @@
   left: 75%;
 }
 
+.title-container {
+  margin-bottom: 50px;
+}
 
 .title-container #title {
-  font-size: 60px;
+  font-size: 70px;
 }
 
 .title-container h2 {

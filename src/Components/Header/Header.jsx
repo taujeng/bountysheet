@@ -11,11 +11,9 @@ const Header = () => {
   const [clock, setClock] = useState(new Date());
   const [displayTimer, setDisplayTimer] = useState(false);
   const [timePassed, setTimePassed] = useState(0); // Time from Stopwatch
-  // const [timerTime, setTimerTime] = useState({ timeLeft: 600, timeUsed: 0 });
-  const [timeLeft, setTimeLeft] = useState(600);
-  const [timeUsed, setTimeUsed] = useState(0);
+  const [timerTime, setTimerTime] = useState({ timeLeft: 600, timeUsed: 0 });
 
-  let time = displayTimer ? timeUsed : timePassed;
+  let time = displayTimer ? timerTime.timeUsed : timePassed;
 
   const localData = localStorage.getItem('BountyTime');
   const localTime = localData ? new Map(JSON.parse(localData)) : false;
@@ -26,8 +24,10 @@ const Header = () => {
     // Check if local storage has a Bounty Time saved
     if (localTime) {
       setTimePassed(localTime.get('stopwatch'));
-      // setTimeLeft(localTime.get('timer').timeLeft);
-      // setTimeUsed(localTime.get('timer').timeUsed);
+      setTimerTime({
+        timeLeft: localTime.get('timer').timeLeft,
+        timeUsed: localTime.get('timer').timeUsed,
+      });
       setDisplayTimer(localTime.get('displayTimer'));
     } else {
       // if first time, set initial Local Storage "BountyTime"
@@ -59,24 +59,10 @@ const Header = () => {
   }
 
   // Handle Timer Changes. time is an object
-  // function timerChange(time) {
-  //   console.log('made it to timerChange', time);
-  //   setTimerTime(time);
-  //   localTime.set('timer', time);
-  //   localStorage.setItem('BountyTime', JSON.stringify([...localTime]));
-  // }
-
-  function handleTimeLeft(time) {
-    console.log('handleTime LEFTGROEKL:GM', time);
-    setTimeLeft(time);
-    console.log(localTime.get('timer').timeLeft, 'timer');
-    localTime.set('timer', { ...localTime.get('timer'), timeLeft: time });
-    localStorage.setItem('BountyTime', JSON.stringify([...localTime]));
-  }
-
-  function handleTimeUsed(time) {
-    setTimeUsed(time);
-    localTime.set('timer', { ...localTime.get('timer'), timeUsed: time });
+  function timerChange(time) {
+    console.log('made it to timerChange', time);
+    setTimerTime(time);
+    localTime.set('timer', time);
     localStorage.setItem('BountyTime', JSON.stringify([...localTime]));
   }
 
@@ -94,20 +80,15 @@ const Header = () => {
           <Clock value={clock} size={200} />
         </div>
         <div className="title-container">
-          <h1 id="title">
+          <div id="title">
             Bounty <br></br>Sheet
-          </h1>
+          </div>
           {/* <h2>Time is money. Spend it wisely.</h2> */}
         </div>
         <div className="time-container">
           <>
             {displayTimer ? (
-              <Timer
-                timeLeft={timeLeft}
-                timeUsed={timeUsed}
-                handleTimeLeft={handleTimeLeft}
-                handleTimeUsed={handleTimeUsed}
-              />
+              <Timer timerTime={timerTime} timerChange={timerChange} />
             ) : (
               <Stopwatch
                 timePassed={timePassed}

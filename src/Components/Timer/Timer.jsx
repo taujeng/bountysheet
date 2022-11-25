@@ -3,41 +3,12 @@ import timeFormat from '../timeFormat';
 import './timer.css';
 
 // timerTime is an object
-const Timer = ({ timeLeft, timeUsed, handleTimeLeft, handleTimeUsed }) => {
+const Timer = ({ timerTime, timerChange }) => {
   const [timerOn, setTimerOn] = useState(false);
   const [edit, setEdit] = useState(false);
 
-  const { hours, minutes, seconds } = timeFormat(timeLeft);
-  const noTime = timeLeft <= 0 ? true : false;
-
-  // useEffect(() => {
-  //   let interval;
-  //   if (!noTime) {
-  //     if (timerOn) {
-  //       interval = setInterval(() => {
-  //         handleTimeLeft(timeLeft - 1);
-  //         // handleTimeUsed(timeUsed + 1);
-  //       }, 1000);
-  //     } else {
-  //       clearInterval(interval);
-  //     }
-  //   }
-
-  //   return () => {
-  //     clearInterval(interval);
-  //   };
-  // }, [timerOn, noTime, handleTimeLeft, handleTimeUsed, timeLeft, timeUsed]);
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     console.log('This will run every second!');
-  //     if (timerOn && !noTime) {
-  //       handleTimeLeft(timeLeft - 1);
-  //       handleTimeUsed(timeUsed + 1);
-  //     }
-  //   }, 1000);
-  //   return () => clearInterval(interval);
-  // }, [timerOn, timeLeft, timeUsed, noTime]);
+  const { hours, minutes, seconds } = timeFormat(timerTime.timeLeft);
+  const noTime = timerTime.timeLeft <= 0 ? true : false;
 
   useEffect(() => {
     let interval;
@@ -45,22 +16,26 @@ const Timer = ({ timeLeft, timeUsed, handleTimeLeft, handleTimeUsed }) => {
       interval = setInterval(() => {
         console.log('This will run every second!');
         if (timerOn && !noTime) {
-          handleTimeLeft(timeLeft - 1);
-          handleTimeUsed(timeUsed + 1);
+          timerChange({
+            ...timerTime,
+            timeLeft: timerTime.timeLeft - 1,
+            timeUsed: timerTime.timeUsed + 1,
+          });
         }
       }, 1000);
     }
 
     return () => clearInterval(interval);
-  }, [timerOn, timeLeft, timeUsed, noTime]);
+  }, [timerTime, timerOn, noTime]);
 
+  // on set, timeUsed also set back to 0
   const handleSetTimer = (e) => {
     console.log(e.target.value);
     // Maximum is 24 hours
     if (e.target.value > 1440) {
-      handleTimeLeft(1440 * 60);
+      timerChange({ ...timerTime, timeLeft: 1440 * 60, timeUsed: 0 });
     } else {
-      handleTimeLeft(e.target.value * 60);
+      timerChange({ ...timerTime, timeLeft: e.target.value * 60, timeUsed: 0 });
     }
     setTimerOn(false);
   };
@@ -71,7 +46,7 @@ const Timer = ({ timeLeft, timeUsed, handleTimeLeft, handleTimeUsed }) => {
         <input
           type="number"
           placeholder="minutes.."
-          value={timeLeft / 60}
+          value={timerTime.timeLeft / 60}
           onChange={handleSetTimer}
           min={0}
           max={1440}
