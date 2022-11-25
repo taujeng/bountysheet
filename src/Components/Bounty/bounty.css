@@ -15,7 +15,10 @@
 }
 .bounty-outer .star {
   position: absolute;
-  left: 275px;
+
+  /* this percentage/px is the distance 
+  from the left side of the window */
+  left: 12%;
   /* transform: translate(-200px); */
 }
 
@@ -25,7 +28,10 @@
 
 .bounty-outer .current-star {
   position: absolute;
-  left: 100px;
+
+  /* this percentage/px is the distance 
+  from the left side of the window */
+  left: 5%;
   /* transform: translateX(50px); */
 }
 
