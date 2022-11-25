@@ -6,14 +6,14 @@ import 'react-clock/dist/Clock.css';
 import './header.css';
 import BountyList from '../BountyList/BountyList';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
-import { handleBreakpoints } from '@mui/system';
 
 const Header = () => {
   const [clock, setClock] = useState(new Date());
   const [displayTimer, setDisplayTimer] = useState(false);
   const [timePassed, setTimePassed] = useState(0); // Time from Stopwatch
-  const [timeLeft, setTimeLeft] = useState(600); // Time displaying on Timer
-  const [timeUsed, setTimeUsed] = useState(0); // Time used from Timer
+  // const [timerTime, setTimerTime] = useState({ timeLeft: 600, timeUsed: 0 });
+  const [timeLeft, setTimeLeft] = useState(600);
+  const [timeUsed, setTimeUsed] = useState(0);
 
   let time = displayTimer ? timeUsed : timePassed;
 
@@ -35,12 +35,12 @@ const Header = () => {
         ['stopwatch', 0],
         [
           'timer',
-          [
-            ['timeLeft', 600],
-            ['timeUsed', 0],
-          ],
-          ['displayTimer', false],
+          {
+            timeLeft: 600,
+            timeUsed: 0,
+          },
         ],
+        ['displayTimer', false],
       ]);
       localStorage.setItem('BountyTime', JSON.stringify([...newTime]));
     }
@@ -55,6 +55,28 @@ const Header = () => {
     setTimePassed(time);
     // Update Local Storage Time:
     localTime.set('stopwatch', reset ? 0 : localTime.get('stopwatch') + 1);
+    localStorage.setItem('BountyTime', JSON.stringify([...localTime]));
+  }
+
+  // Handle Timer Changes. time is an object
+  // function timerChange(time) {
+  //   console.log('made it to timerChange', time);
+  //   setTimerTime(time);
+  //   localTime.set('timer', time);
+  //   localStorage.setItem('BountyTime', JSON.stringify([...localTime]));
+  // }
+
+  function handleTimeLeft(time) {
+    console.log('handleTime LEFTGROEKL:GM', time);
+    setTimeLeft(time);
+    console.log(localTime.get('timer').timeLeft, 'timer');
+    localTime.set('timer', { ...localTime.get('timer'), timeLeft: time });
+    localStorage.setItem('BountyTime', JSON.stringify([...localTime]));
+  }
+
+  function handleTimeUsed(time) {
+    setTimeUsed(time);
+    localTime.set('timer', { ...localTime.get('timer'), timeUsed: time });
     localStorage.setItem('BountyTime', JSON.stringify([...localTime]));
   }
 
@@ -82,9 +104,9 @@ const Header = () => {
             {displayTimer ? (
               <Timer
                 timeLeft={timeLeft}
-                setTimeLeft={setTimeLeft}
                 timeUsed={timeUsed}
-                setTimeUsed={setTimeUsed}
+                handleTimeLeft={handleTimeLeft}
+                handleTimeUsed={handleTimeUsed}
               />
             ) : (
               <Stopwatch
