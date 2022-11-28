@@ -1,0 +1,10 @@
+.navBar-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.navBar-container .navBar-left, .navBar-right {
+  display: flex;
+}
+

@@ -1,0 +1,51 @@
+.info-container .modal-button {
+  margin: 10px;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+} 
+
+.info-container .modal-button:hover {
+  color: darkgreen;
+}
+
+
+/* should cover the entire screen */
+
+.modal-container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+ /* actual modal content */
+.modal-content {
+  background: white;
+  width: 500px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-footer {
+  margin-top: 50px;
+}
+
+.modal-footer .modal-close {
+  height: 60px;
+  width: 60px;
+  cursor: pointer;
+}
+
+.modal-footer .modal-close:hover {
+  color:darkred;
+}
