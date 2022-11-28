@@ -10,8 +10,14 @@ const StatsModal = () => {
       {modalOpen ? (
         <div className="modal-container" onClick={() => setModalOpen(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h1>title</h1>
-            <body className="modal-body">this is how bs works</body>
+            <h1>Stats</h1>
+            <div className="modal-body">
+              <div>
+                All bounties that are cashed in are saved to the local storage
+                of your web browser!
+              </div>
+              <div>Stats: Coming soon..</div>
+            </div>
             <footer className="modal-footer">
               <Close
                 className="modal-close"
@@ -23,6 +29,6 @@ const StatsModal = () => {
       ) : null}
     </div>
   );
-}
+};
 
-export default StatsModal
+export default StatsModal;

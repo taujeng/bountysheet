@@ -96,7 +96,11 @@ const Header = () => {
               />
             )}
           </>
-          <AutorenewIcon style={{ fontSize: '40px' }} onClick={handleSwitch} />
+          <AutorenewIcon
+            id="time-swap"
+            style={{ fontSize: '40px' }}
+            onClick={handleSwitch}
+          />
         </div>
       </header>
       <BountyList time={time} />

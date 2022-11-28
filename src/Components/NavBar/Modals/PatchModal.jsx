@@ -1,17 +1,34 @@
 import React, { useState } from 'react';
 import { FormatListBulleted, Close } from '@mui/icons-material/';
 import './modals.css';
+import patchNotes from '../../../patchNotes';
 
 const PatchModal = () => {
   const [modalOpen, setModalOpen] = useState(false);
+
+  const notes = patchNotes();
+
+  // key count 
+  let keyCount = 0;
+
   return (
     <div className="info-container">
       <FormatListBulleted className="modal-button" onClick={() => setModalOpen(true)} />
       {modalOpen ? (
         <div className="modal-container" onClick={() => setModalOpen(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h1>title</h1>
-            <body className="modal-body">this is how bs works</body>
+            <h1>Patch Notes</h1>
+            <div className="modal-body">
+              {Object.entries(notes).map(item => {
+                return <div key={item[0]}>
+                  <h4>{item[1].date}</h4>
+                  {item[1].notes.map((line)=> {
+                    keyCount++;
+                    return <li key={keyCount}>{line}</li>
+                  })}
+                </div>
+              })}
+            </div>
             <footer className="modal-footer">
               <Close
                 className="modal-close"

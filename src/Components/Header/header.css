@@ -41,3 +41,12 @@
 .time-container {
   display: flex;
 }
+
+#time-swap {
+  cursor: pointer;
+  color: #0492C2;
+}
+
+#time-swap:hover {
+  color: #63C5DA;
+}

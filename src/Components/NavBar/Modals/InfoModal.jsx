@@ -10,8 +10,8 @@ const InfoModal = () => {
       {modalOpen ? (
         <div className="modal-container" onClick={() => setModalOpen(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h1>title</h1>
-            <body className="modal-body">this is how bs works</body>
+            <h1>Info</h1>
+            <div className="modal-body">Coming soon..</div>
             <footer className="modal-footer">
               <Close
                 className="modal-close"
