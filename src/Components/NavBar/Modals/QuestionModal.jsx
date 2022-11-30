@@ -34,6 +34,8 @@ const QuestionModal = () => {
                 Submit Bounties that you want to get done, and time yourself
                 with the timer/stopwatch on the top right. Featured bounties
                 have a clock button that saves the amount of time you used.
+                Completed bounties can be cashed in, and will be saved to the
+                stats page.
               </div>
             </div>
             <footer className="modal-footer">

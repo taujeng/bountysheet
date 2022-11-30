@@ -13,9 +13,6 @@ const BountyList = ({ time }) => {
 
   const [form, setForm] = useState('');
   const [listId, setListId] = useState(1); // ea item in the list gets an id
-  const [currentBounty, setCurrentBounty] = useState(0); // contains id
-
-  // const id = list.length;  -> doesn't work once you add the remove function
 
   useEffect(() => {
     // Only run once when app loads
@@ -56,16 +53,6 @@ const BountyList = ({ time }) => {
     if (bounty.completed) finish++;
   }
 
-  // // current bounty info: *@array
-  // let current = list.filter((item) => item.id === currentBounty);
-  // // remaining bounties:
-  // let sideBounty = list.filter((item) => item.id !== currentBounty);
-  // // incomplete bounties:
-  // let todoList = sideBounty.filter((item) => !item.completed);
-  // // completed bounties:
-  // let completedList = sideBounty.filter((item) => item.completed);
-  // // # of completed bounties
-  // let finish = list.filter((item) => item.completed).length;
 
   function handleSubmit(e) {
     e.preventDefault();
