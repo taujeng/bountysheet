@@ -12,14 +12,16 @@ const Timer = ({ timerTime, timerChange }) => {
 
   useEffect(() => {
     let interval;
+    let initialTime = new Date().getTime();
     if (timerOn && !noTime) {
       interval = setInterval(() => {
-        console.log('This will run every second!');
+        let now = new Date().getTime();
+        let actualTime = Math.round((now - initialTime) / 1000);
         if (timerOn && !noTime) {
           timerChange({
             ...timerTime,
-            timeLeft: timerTime.timeLeft - 1,
-            timeUsed: timerTime.timeUsed + 1,
+            timeLeft: timerTime.timeLeft - actualTime,
+            timeUsed: timerTime.timeUsed + actualTime,
           });
         }
       }, 1000);
@@ -42,8 +44,10 @@ const Timer = ({ timerTime, timerChange }) => {
 
   return (
     <div className="timer-container">
+      <div className="timer-title">Timer</div>
       {edit ? (
         <input
+          className="timer"
           type="number"
           placeholder="minutes.."
           value={timerTime.timeLeft / 60}
@@ -53,14 +57,20 @@ const Timer = ({ timerTime, timerChange }) => {
           step={5}
         />
       ) : noTime ? (
-        <div style={{ color: 'red' }}>00:00:00</div>
+        <div className="timer" style={{ color: 'red' }}>
+          00:00:00
+        </div>
       ) : (
-        <div>
+        <div className="timer">
           {hours}:{minutes}:{seconds}
         </div>
       )}
       <div className="button-container">
-        <button onClick={() => setTimerOn(!timerOn)} disabled={edit}>
+        <button
+          onClick={() => setTimerOn(!timerOn)}
+          disabled={edit || noTime}
+          style={{ cursor: edit || noTime ? 'auto' : 'pointer' }}
+        >
           {timerOn ? 'Stop' : 'Start'}
         </button>
         <button onClick={() => setEdit(!edit)}>{edit ? 'Save' : 'Set'}</button>

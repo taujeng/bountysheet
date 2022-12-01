@@ -13,7 +13,6 @@ const BountyList = ({ time }) => {
 
   const [form, setForm] = useState('');
   const [listId, setListId] = useState(1); // ea item in the list gets an id
-  const [currentBounty, setCurrentBounty] = useState(0); // contains id
 
   // const id = list.length;  -> doesn't work once you add the remove function
 
@@ -39,7 +38,7 @@ const BountyList = ({ time }) => {
       }
       setListId(max + 1);
     }
-  });
+  },[]);
 
   let current = {},
     completedList = [],

@@ -54,7 +54,7 @@ const Header = () => {
   function stopwatchChange(time, reset = false) {
     setTimePassed(time);
     // Update Local Storage Time:
-    localTime.set('stopwatch', reset ? 0 : localTime.get('stopwatch') + 1);
+    localTime.set('stopwatch', reset ? 0 : time);
     localStorage.setItem('BountyTime', JSON.stringify([...localTime]));
   }
 

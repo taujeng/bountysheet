@@ -5,8 +5,13 @@
   border-radius: 15px;
   padding: 10px 10px 15px;
   width: 250px;
-  height: 100px;
+  height: 125px;
   margin-top: 20px;
+}
+
+.stopwatch-container .stopwatch-title {
+  display: flex;
+  justify-content: center;
 }
 
 .stopwatch-container #stopwatch {
