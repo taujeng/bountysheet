@@ -36,7 +36,7 @@ const BountyList = ({ time }) => {
       }
       setListId(max + 1);
     }
-  });
+  },[]);
 
   let current = {},
     completedList = [],
