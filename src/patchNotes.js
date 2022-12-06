@@ -13,6 +13,10 @@ export default function patchNotes() {
       notes: ["Fixed the stopwatch/timer so that it kept track of time correctly even if BountySheet is not an active tab.",
       "Added a label for the stopwatch/timer.",
       "Disabled the timer's start button when there's no more time."]
+    },
+    3: {
+      date: "December 6, 2022",
+      notes: ["Updated the stats modal to include the average and total bounty/time spent.", "Added a daily bounty/time counter to the top right."]
     }
   }
   return data;
