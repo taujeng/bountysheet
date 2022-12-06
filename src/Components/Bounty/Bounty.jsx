@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import timeFormat from '../timeFormat';
 import './bounty.css';
+import { UpdateAppContext } from '../../App';
 import {
   Edit,
   Delete,
@@ -10,6 +11,7 @@ import {
   StarBorder,
   Star,
   LocalAtm,
+  Update,
 } from '@mui/icons-material/';
 
 const Bounty = ({
@@ -23,6 +25,7 @@ const Bounty = ({
 }) => {
   const [edit, setEdit] = useState(false);
   const [hover, setHover] = useState(false);
+  const { updateApp, setUpdateApp } = useContext(UpdateAppContext);
 
   const { hours, minutes, seconds } = timeFormat(item.time);
 
@@ -50,6 +53,9 @@ const Bounty = ({
       });
     }
     localStorage.setItem('BountyHistory', JSON.stringify([...newHistory]));
+
+    // UpdateDaily -> In turn updates Daily.jsx
+    setUpdateApp(!updateApp);
   }
 
   return (
