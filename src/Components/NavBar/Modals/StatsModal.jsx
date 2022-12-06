@@ -3,13 +3,11 @@ import { BarChart, Close, ContentCopy } from '@mui/icons-material/';
 import './modals.css';
 import timeFormat from '../../timeFormat';
 
-const StatsModal = () => {
+const StatsModal = ({ history }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
-  const pastHistory = localStorage.getItem('BountyHistory');
-  const history = pastHistory ? new Map(JSON.parse(pastHistory)) : false;
-
   // Values:
+
   const days = history.size;
   let totalTime = 0;
   let totalBounty = 0;
@@ -17,6 +15,17 @@ const StatsModal = () => {
     totalTime += value.time;
     totalBounty += value.bounties;
   }
+
+  // let days;
+  // let totalTime = 0;
+  // let totalBounty = 0;
+  // if (history) {
+  //   for (const [key, value] of history.entries()) {
+  //     totalTime += value.time;
+  //     totalBounty += value.bounties;
+  //   }
+  //   days = history.size;
+  // }
 
   const { hours, minutes, seconds } = timeFormat(totalTime);
 

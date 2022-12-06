@@ -1,0 +1,11 @@
+.daily-container {
+  display: flex;
+  align-items: center;
+  color: goldenrod;
+}
+
+.daily-container *{
+  display: flex;
+  align-items: center;
+  padding-right: 5px;
+}

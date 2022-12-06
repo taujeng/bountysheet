@@ -6,7 +6,7 @@ import QuestionModal from './Modals/QuestionModal';
 import Daily from './Daily';
 import './navBar.css';
 
-const NavBar = () => {
+const NavBar = ({ history }) => {
   return (
     <div className="navBar-container">
       <div className="navBar-left">
@@ -14,8 +14,8 @@ const NavBar = () => {
         <PatchModal />
       </div>
       <div className="navBar-right">
-        <Daily />
-        <StatsModal />
+        <Daily history={history} />
+        <StatsModal history={history} />
         <InfoModal />
       </div>
     </div>

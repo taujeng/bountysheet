@@ -1,24 +1,20 @@
 import React from 'react';
 import { MonetizationOn, WorkspacePremium } from '@mui/icons-material/';
+import './daily.css'
 
-const Daily = () => {
-  const pastHistory = localStorage.getItem('BountyHistory');
-  const history = pastHistory ? new Map(JSON.parse(pastHistory)) : false;
+const Daily = ({history}) => {
   let dailyBounty = 0,
     dailyTime = 0;
 
   const todayDate = new Date().toString().slice(4, 15);
-  console.log(history);
-  console.log(todayDate);
   if (history.has(todayDate)) {
-    console.log('historical');
     let dailyHistory = history.get(todayDate);
     dailyBounty = dailyHistory.bounties;
     dailyTime = Math.round(dailyHistory.time / 60);
   }
 
   return (
-    <div>
+    <div className="daily-container">
       <div className="daily-bounty">
         <WorkspacePremium />
         {dailyBounty}
