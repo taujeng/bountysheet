@@ -17,6 +17,10 @@ export default function patchNotes() {
     3: {
       date: "December 6, 2022",
       notes: ["Updated the stats modal to include the average and total bounty/time spent.", "Added a daily bounty/time counter to the top right."]
+    },
+    4: {
+      date: "December 8, 2022",
+      notes: ["Added a modal for the daily bounty/time."]
     }
   }
   return data;
