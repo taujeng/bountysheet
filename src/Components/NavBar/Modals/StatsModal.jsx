@@ -1,31 +1,20 @@
 import React, { useState } from 'react';
-import { BarChart, Close, ContentCopy } from '@mui/icons-material/';
+import { BarChart, Close } from '@mui/icons-material/';
 import './modals.css';
 import timeFormat from '../../timeFormat';
 
 const StatsModal = ({ history }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
-  // Values:
-
   const days = history.size;
   let totalTime = 0;
   let totalBounty = 0;
   for (const [key, value] of history.entries()) {
-    totalTime += value.time;
-    totalBounty += value.bounties;
+    for (let task of value) {
+      totalTime += task[1];
+    }
+    totalBounty += value.length;
   }
-
-  // let days;
-  // let totalTime = 0;
-  // let totalBounty = 0;
-  // if (history) {
-  //   for (const [key, value] of history.entries()) {
-  //     totalTime += value.time;
-  //     totalBounty += value.bounties;
-  //   }
-  //   days = history.size;
-  // }
 
   const { hours, minutes, seconds } = timeFormat(totalTime);
 

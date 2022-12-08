@@ -17,8 +17,8 @@ const QuestionModal = () => {
             <div className="modal-body">
               <h3>What is this?</h3>
               <div>
-                A to do list meant that can also be used to keep track of how
-                much time is used per task.
+                A to do list that can also be used to keep track of how much
+                time is used per task.
               </div>
               <h3>Why did you make this?</h3>
               <div>
@@ -33,9 +33,10 @@ const QuestionModal = () => {
               <div>
                 Submit Bounties that you want to get done, and time yourself
                 with the timer/stopwatch on the top right. Featured bounties
-                have a clock button that saves the amount of time you used.
+                have a clock button that saves the amount of time used.
                 Completed bounties can be cashed in, and will be saved to the
-                stats page.
+                stats page. Bounties completed today will be featured in the
+                daily page.
               </div>
             </div>
             <footer className="modal-footer">

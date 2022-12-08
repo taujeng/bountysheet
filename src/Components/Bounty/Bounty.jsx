@@ -33,26 +33,39 @@ const Bounty = ({
     handleDelete(item.id);
 
     const finishDate = Date().slice(4, 15);
-
-    const pastHistory = localStorage.getItem('BountyHistory');
+    const pastHistory = localStorage.getItem('History');
     const newHistory = pastHistory
       ? new Map(JSON.parse(pastHistory))
       : new Map();
     if (newHistory.has(finishDate)) {
-      let oldValue = newHistory.get(finishDate);
-      newHistory.set(finishDate, {
-        ...oldValue,
-        //    grabs old value, adds new value
-        time: oldValue.time + item.time,
-        bounties: oldValue.bounties + 1,
-      });
+      newHistory.set(finishDate, [
+        ...newHistory.get(finishDate),
+        [item.task, item.time],
+      ]);
     } else {
-      newHistory.set(finishDate, {
-        time: item.time,
-        bounties: 1,
-      });
+      newHistory.set(finishDate, [[item.task, item.time]]);
     }
-    localStorage.setItem('BountyHistory', JSON.stringify([...newHistory]));
+    localStorage.setItem('History', JSON.stringify([...newHistory]));
+
+    // const pastHistory = localStorage.getItem('BountyHistory');
+    // const newHistory = pastHistory
+    //   ? new Map(JSON.parse(pastHistory))
+    //   : new Map();
+    // if (newHistory.has(finishDate)) {
+    //   let oldValue = newHistory.get(finishDate);
+    //   newHistory.set(finishDate, {
+    //     ...oldValue,
+    //     //    grabs old value, adds new value
+    //     time: oldValue.time + item.time,
+    //     bounties: oldValue.bounties + 1,
+    //   });
+    // } else {
+    //   newHistory.set(finishDate, {
+    //     time: item.time,
+    //     bounties: 1,
+    //   });
+    // }
+    // localStorage.setItem('BountyHistory', JSON.stringify([...newHistory]));
 
     // UpdateDaily -> In turn updates Daily.jsx
     setUpdateApp(!updateApp);
