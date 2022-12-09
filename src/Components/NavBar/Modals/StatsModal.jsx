@@ -7,6 +7,7 @@ const StatsModal = ({ history }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const days = history.size;
+
   let totalTime = 0;
   let totalBounty = 0;
   for (const [key, value] of history.entries()) {
@@ -34,11 +35,11 @@ const StatsModal = ({ history }) => {
                 <div>
                   <h3>
                     Average # of Bounties per day:{' '}
-                    {Math.round(totalBounty / days)}
+                    {days > 0 ? Math.round(totalBounty / days) : 0}
                   </h3>
                   <h3>
                     Average Time Spent per day:{' '}
-                    {Math.round(totalTime / 60 / days)} minutes
+                    {days > 0 ? Math.round(totalTime / 60 / days) : 0} minutes
                   </h3>
                   <h3># of Bounties Completed: {totalBounty}</h3>
                   <h3>
