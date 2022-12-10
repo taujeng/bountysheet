@@ -50,7 +50,11 @@ const Daily = ({ history }) => {
             </div>
             <div className="modal-daily-list">
               {dailyHistory.map((item, ind) => {
-                return <li key={ind}>{item[1] + ' ' + ':' + ' ' + item[0]}</li>;
+                return (
+                  <li key={ind}>
+                    {Math.round(item[1] / 60) + ' min ' + ':' + ' ' + item[0]}
+                  </li>
+                );
               })}
             </div>
             <footer className="modal-footer">
