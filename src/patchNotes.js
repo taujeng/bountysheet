@@ -21,6 +21,10 @@ export default function patchNotes() {
     4: {
       date: "December 8, 2022",
       notes: ["Added a modal for the daily bounty/time."]
+    },
+    5: {
+      date: "December 17, 2022",
+      notes: ["Don't know what to do? Ask ChatGPT! Suggest a topic, and ChatGPT will provide three suggestions."]
     }
   }
   return data;

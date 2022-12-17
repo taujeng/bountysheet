@@ -50,3 +50,17 @@
 #time-swap:hover {
   color: #63C5DA;
 }
+
+.header-container .chatGPT-button {
+  cursor: pointer;
+  background: none;
+  color: #1167b1;
+  border: none;
+  height: 50px;
+  width: 50px;
+}
+
+.header-container .chatGPT-button:hover {
+  color: darkred;
+}
+

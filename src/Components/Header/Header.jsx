@@ -5,13 +5,15 @@ import Timer from '../Timer/Timer';
 import 'react-clock/dist/Clock.css';
 import './header.css';
 import BountyList from '../BountyList/BountyList';
-import AutorenewIcon from '@mui/icons-material/Autorenew';
+import { Close, Autorenew, SmartToy } from '@mui/icons-material/';
+import ChatGPT from '../chatGPT/ChatGPT';
 
 const Header = () => {
   const [clock, setClock] = useState(new Date());
   const [displayTimer, setDisplayTimer] = useState(false);
   const [timePassed, setTimePassed] = useState(0); // Time from Stopwatch
   const [timerTime, setTimerTime] = useState({ timeLeft: 600, timeUsed: 0 });
+  const [showChatGPT, setShowChatGPT] = useState(true);
 
   let time = displayTimer ? timerTime.timeUsed : timePassed;
 
@@ -96,13 +98,16 @@ const Header = () => {
               />
             )}
           </>
-          <AutorenewIcon
+          <Autorenew
             id="time-swap"
             style={{ fontSize: '40px' }}
             onClick={handleSwitch}
           />
         </div>
       </header>
+      {showChatGPT ? <><ChatGPT setShowChatGPT={setShowChatGPT}/> </>
+       : <SmartToy className="chatGPT-button" onClick={()=>setShowChatGPT(true)} />  }
+      
       <BountyList time={time} />
     </div>
   );

@@ -130,9 +130,7 @@ const BountyList = ({ time }) => {
           handleTime={handleTime}
         />
       ) : (
-        <div className="current-container example">
-          <em>Example: Walk the dog.</em>
-        </div>
+        <></>
       )}
       <div className="meter-container">
         <h1>

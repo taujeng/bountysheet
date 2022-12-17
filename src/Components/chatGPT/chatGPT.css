@@ -1,0 +1,35 @@
+.chatGPT-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #1167b1;
+  background-color: aliceblue;
+  padding: 10px 20px;
+  border-radius: 15px;
+  border: 0.5px grey solid;
+}
+
+.chatGPT-container form {
+  display: flex;
+}
+
+.chatGPT-container form button {
+  cursor: pointer;
+}
+
+.result-container {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#chatGPT-close {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+
+#chatGPT-close:hover {
+  color: darkred;
+}

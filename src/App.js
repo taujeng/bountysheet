@@ -2,6 +2,8 @@ import Header from './Components/Header/Header'
 import './app.css'
 import NavBar from './Components/NavBar/NavBar'
 import {createContext, useState} from 'react'
+import ChatGPT from './Components/chatGPT/ChatGPT'
+import MyComponent from './Components/chatGPT/MyComponent'
 
 export const UpdateAppContext = createContext(true);
 
@@ -27,6 +29,7 @@ function App() {
       <UpdateAppContext.Provider value={{updateApp, setUpdateApp}}>
         <NavBar history={history}/>
         <Header />
+
       </UpdateAppContext.Provider>
     </div>
   );
