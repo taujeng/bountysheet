@@ -17,7 +17,7 @@ const ChatGPT = ({ setShowChatGPT }) => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
+            Authorization: `Bearer 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`,
           },
           body: JSON.stringify({
             prompt: `List three tasks to do regarding ${query}`,
