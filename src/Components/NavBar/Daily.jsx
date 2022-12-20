@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MonetizationOn, WorkspacePremium, Close } from '@mui/icons-material/';
+import { Tooltip, Zoom } from '@mui/material/';
 import './Modals/modals.css';
 import './daily.css';
 
@@ -20,24 +21,28 @@ const Daily = ({ history }) => {
   dailyTime = Math.round(dailyTime / 60);
 
   return (
-    <div className="info-container">
-      <div
-        className="daily-container modal-button"
-        onClick={() => setModalOpen(true)}
-      >
-        <div className="daily-bounty">
-          <WorkspacePremium />
-          {dailyBounty}
+    <div className="info-container" >
+      <Tooltip title="Daily Stats" TransitionComponent={Zoom} >
+        <div
+          className="daily-container modal-button"
+          onClick={() => setModalOpen(true)}
+        >
+          <div className="daily-bounty">
+            <WorkspacePremium />
+            {dailyBounty}
+          </div>
+          <div className="daily-time">
+            <MonetizationOn />
+            {dailyTime}
+          </div>
         </div>
-        <div className="daily-time">
-          <MonetizationOn />
-          {dailyTime}
-        </div>
-      </div>
+      </Tooltip>
+
       {modalOpen ? (
         <div className="modal-container" onClick={() => setModalOpen(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <h1>Completed Today:</h1>
+            <div className="modal-divider"></div>
             <div className="modal-daily-award">
               <div className="modal-daily-content">
                 <WorkspacePremium />

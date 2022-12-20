@@ -13,6 +13,7 @@ import {
   LocalAtm,
   Update,
 } from '@mui/icons-material/';
+import { Tooltip } from '@mui/material';
 
 const Bounty = ({
   item,
@@ -96,12 +97,15 @@ const Bounty = ({
       >
         <div className="bounty">
           {current ? (
-            <Alarm
-              className="bounty-button"
-              onClick={() => handleTime(item.id)}
-            >
-              Save Time
-            </Alarm>
+            <Tooltip title="Record time">
+              <Alarm
+                className="bounty-button"
+                
+                onClick={() => handleTime(item.id)}
+              >
+                Save Time
+              </Alarm>
+            </Tooltip>
           ) : null}
           <div className="bounty-time">
             {hours}:{minutes}:{seconds}

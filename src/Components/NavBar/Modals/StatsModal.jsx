@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BarChart, Close } from '@mui/icons-material/';
+import { Tooltip, Zoom } from '@mui/material/';
 import './modals.css';
 import timeFormat from '../../timeFormat';
 
@@ -21,11 +22,14 @@ const StatsModal = ({ history }) => {
 
   return (
     <div className="info-container">
-      <BarChart className="modal-button" onClick={() => setModalOpen(true)} />
+      <Tooltip title="Stats" TransitionComponent={Zoom}>
+        <BarChart className="modal-button" onClick={() => setModalOpen(true)} />
+      </Tooltip>
       {modalOpen ? (
         <div className="modal-container" onClick={() => setModalOpen(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <h1>Stats</h1>
+            <div className="modal-divider"></div>
             <div className="modal-body">
               <div>
                 All bounties that are cashed in are saved to the local storage

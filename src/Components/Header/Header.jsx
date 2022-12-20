@@ -6,6 +6,7 @@ import 'react-clock/dist/Clock.css';
 import './header.css';
 import BountyList from '../BountyList/BountyList';
 import { Close, Autorenew, SmartToy } from '@mui/icons-material/';
+import { Tooltip, Zoom } from '@mui/material/';
 import ChatGPT from '../chatGPT/ChatGPT';
 
 const Header = () => {
@@ -98,11 +99,14 @@ const Header = () => {
               />
             )}
           </>
-          <Autorenew
-            id="time-swap"
-            style={{ fontSize: '40px' }}
-            onClick={handleSwitch}
-          />
+          <Tooltip title={`Switch to ${displayTimer ? "Stopwatch" : "Timer"}`}>
+            <Autorenew
+              id="time-swap"
+              style={{ fontSize: '40px' }}
+              onClick={handleSwitch}
+            />
+          </Tooltip>
+
         </div>
       </header>
       {showChatGPT ? <><ChatGPT setShowChatGPT={setShowChatGPT}/> </>

@@ -38,6 +38,17 @@
   border-radius: 10px;
 }
 
+.modal-content h1 {
+  margin-bottom: 0;
+}
+
+.modal-content .modal-divider {
+  width: 50%;
+  border-top: 2px black solid;
+  margin-bottom: 25px;
+}
+
+
 .modal-footer {
   margin-top: 50px;
 }

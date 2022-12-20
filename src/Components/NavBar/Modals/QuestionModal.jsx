@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
 import { ContactSupport, Close } from '@mui/icons-material/';
+import { Tooltip, Zoom } from '@mui/material/';
 import './modals.css';
 
 const QuestionModal = () => {
   const [modalOpen, setModalOpen] = useState(false);
   return (
     <div className="info-container">
-      <ContactSupport
-        className="modal-button"
-        onClick={() => setModalOpen(true)}
-      />
+      <Tooltip title="Questions" TransitionComponent={Zoom}>
+        <ContactSupport
+          className="modal-button"
+          onClick={() => setModalOpen(true)}
+        />
+      </Tooltip>
       {modalOpen ? (
         <div className="modal-container" onClick={() => setModalOpen(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <h1>FAQ</h1>
+            <div className="modal-divider"></div>
             <div className="modal-body">
               <h3>What is this?</h3>
               <div>
