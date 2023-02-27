@@ -5,6 +5,7 @@ import '../Bounty/bounty.css';
 import Meter from '../Meter/Meter';
 import listReducer from './listReducer';
 import AddBoxIcon from '@mui/icons-material/AddBox';
+import emptyCart from '../../assets/images/empty_cart.svg'
 
 let grabLocal = false;
 
@@ -143,7 +144,7 @@ const BountyList = ({ time }) => {
           ) + '%'}
         </h1>
       </div>
-      {todoList.map((item) => (
+      {todoList.length > 0 ? todoList.map((item) => (
         <Bounty
           key={item.id}
           item={item}
@@ -153,7 +154,7 @@ const BountyList = ({ time }) => {
           handleStar={handleStar}
           handleTime={handleTime}
         />
-      ))}
+      )) : <img src={emptyCart} alt='empty cart' id="img-emptyCart"></img>}
       {completedList.map((item) => (
         <Bounty
           key={item.id}

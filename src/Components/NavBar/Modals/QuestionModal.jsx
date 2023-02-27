@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ContactSupport, Close } from '@mui/icons-material/';
 import { Tooltip, Zoom } from '@mui/material/';
 import './modals.css';
+import welcomeImg from '../../../assets/images/welcome.svg';
 
 const QuestionModal = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -25,14 +26,14 @@ const QuestionModal = () => {
                 time is used per task.
               </div>
               <h3>Why did you make this?</h3>
-              <div>
+              {/* <div>
                 When studying, I normally jot down what I worked on and the
                 amount of time spent. I've gone through a couple physical
                 notebooks, and thought I'd make my own version but with
                 additional functions I've always wanted. Plus, this was an
                 opportunity to try utilizing some React skills I've been
                 learning.
-              </div>
+              </div> */}
               <h3>How do I use Bounty Sheet?</h3>
               <div>
                 Submit Bounties that you want to get done, and time yourself
@@ -43,6 +44,7 @@ const QuestionModal = () => {
                 daily page.
               </div>
             </div>
+            <img src={welcomeImg} alt='Welcome!' class="img-modal"></img>
             <footer className="modal-footer">
               <Close
                 className="modal-close"

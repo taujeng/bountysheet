@@ -27,15 +27,31 @@
 
 .title-container {
   margin-bottom: 50px;
+  display: flex;
 }
 
 .title-container #title {
-  font-size: 70px;
+  font-size: 60px;
+  color: var(--primary-2);
 }
 
 .title-container h2 {
   font-style: italic;
   font-size: 20px;
+}
+
+#img-main {
+  height: 150px;
+  width: 100%;
+  margin-left: 50px;
+  transform: translateY(10px);
+  display: none;
+}
+
+@media (min-width: 992px) {
+  #img-main {
+    display: block;
+  }
 }
 
 .time-container {

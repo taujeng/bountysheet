@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Info, Close } from '@mui/icons-material/';
 import { Tooltip, Zoom } from '@mui/material/';
 import './modals.css';
+import waitingForYou from '../../../assets/images/waiting_for_you.svg'
 
 const InfoModal = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -16,6 +17,7 @@ const InfoModal = () => {
             <h1>Info</h1>
             <div className="modal-divider"></div>
             <div className="modal-body">If you have any comments/suggestions, I can be reached at slarkgoesfishing@gmail.com</div>
+            <img src={waitingForYou} alt='Waiting for you..' class="img-modal"></img>
             <footer className="modal-footer">
               <Close
                 className="modal-close"

@@ -42,3 +42,10 @@
   align-items: center;
   margin: 0 20px;
 }
+
+    /* Images */
+#img-emptyCart {
+  height: 150%;
+  /* width: 150%; */
+  margin-top: 50px;
+}

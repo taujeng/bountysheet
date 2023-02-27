@@ -25,6 +25,10 @@ export default function patchNotes() {
     5: {
       date: "December 17, 2022",
       notes: ["Don't know what to do? Ask ChatGPT! Suggest a topic, and ChatGPT will provide three suggestions."]
+    },
+    6: {
+      date: "February 26, 2023",
+      notes: ["Added some images."]
     }
   }
   return data;

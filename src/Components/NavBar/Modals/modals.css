@@ -49,6 +49,15 @@
 }
 
 
+  /* modal image */
+.img-modal {
+  margin-top: 25px;
+  height: 200px;
+  width: 100%;
+}
+
+
+
 .modal-footer {
   margin-top: 50px;
 }

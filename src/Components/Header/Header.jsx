@@ -8,6 +8,7 @@ import BountyList from '../BountyList/BountyList';
 import { Close, Autorenew, SmartToy } from '@mui/icons-material/';
 import { Tooltip, Zoom } from '@mui/material/';
 import ChatGPT from '../chatGPT/ChatGPT';
+import treeSwing from '../../assets/images/tree_swing.svg'
 
 const Header = () => {
   const [clock, setClock] = useState(new Date());
@@ -86,6 +87,7 @@ const Header = () => {
           <div id="title">
             Bounty <br></br>Sheet
           </div>
+          <img src={treeSwing} alt={`treeSwing`} id='img-main'></img>
           {/* <h2>Time is money. Spend it wisely.</h2> */}
         </div>
         <div className="time-container">

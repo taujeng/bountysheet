@@ -3,6 +3,7 @@ import { MonetizationOn, WorkspacePremium, Close } from '@mui/icons-material/';
 import { Tooltip, Zoom } from '@mui/material/';
 import './Modals/modals.css';
 import './daily.css';
+import blankCanvas from '../../assets/images/blank_canvas.svg'
 
 const Daily = ({ history }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -54,13 +55,13 @@ const Daily = ({ history }) => {
               </div>
             </div>
             <div className="modal-daily-list">
-              {dailyHistory.map((item, ind) => {
+              {dailyHistory.length > 1 ? dailyHistory.map((item, ind) => {
                 return (
                   <li key={ind}>
                     {Math.round(item[1] / 60) + ' min ' + ':' + ' ' + item[0]}
                   </li>
                 );
-              })}
+              }) : <img src={blankCanvas} alt='blank canvas' class='img-modal'></img>}
             </div>
             <footer className="modal-footer">
               <Close
