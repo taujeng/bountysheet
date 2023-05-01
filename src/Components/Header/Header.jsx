@@ -111,8 +111,8 @@ const Header = () => {
 
         </div>
       </header>
-      {showChatGPT ? <><ChatGPT setShowChatGPT={setShowChatGPT}/> </>
-       : <SmartToy className="chatGPT-button" onClick={()=>setShowChatGPT(true)} />  }
+      {/* {showChatGPT ? <><ChatGPT setShowChatGPT={setShowChatGPT}/> </>
+       : <SmartToy className="chatGPT-button" onClick={()=>setShowChatGPT(true)} />  } */}
       
       <BountyList time={time} />
     </div>
